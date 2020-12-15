@@ -4,8 +4,6 @@ import org.springframework.data.relational.core.sql.Condition;
 import org.springframework.data.relational.core.sql.TrueCondition;
 import org.springframework.data.relational.core.sql.Visitor;
 
-import javax.annotation.Nonnull;
-
 /**
  * @author zuozhu.meng
  * @since 2020/12/15
@@ -48,7 +46,6 @@ public class FilterCondition implements Condition {
     }
 
     @Override
-    @Nonnull
     public String toString() {
         return holder.toString();
     }
