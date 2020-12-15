@@ -8,6 +8,7 @@ import org.springframework.data.jdbc.core.convert.JdbcConverter;
 import org.springframework.data.relational.core.mapping.RelationalMappingContext;
 import org.springframework.data.relational.core.sql.*;
 import org.springframework.data.relational.core.sql.render.SqlRenderer;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -46,12 +47,18 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
 
     @SuppressWarnings("unchecked")
     private List<User> query(Select select) {
-        RowMapper<User> entityRowMapper = (RowMapper<User>) getEntityRowMapper();
+        RowMapper<User> entityRowMapper = (RowMapper<User>) getEntityRowMapper(User.class);
         return namedParameterJdbcTemplate.query(sqlRenderer.render(select), entityRowMapper);
+        // you can also use BeanPropertyRowMapper
+        // return namedParameterJdbcTemplate.query(sqlRenderer.render(select), getBeanPropertyRowMapper(User.class));
     }
 
-    private EntityRowMapper<?> getEntityRowMapper() {
-        return new EntityRowMapper<>(context.getRequiredPersistentEntity(User.class), converter);
+    private EntityRowMapper<?> getEntityRowMapper(Class<?> type) {
+        return new EntityRowMapper<>(context.getRequiredPersistentEntity(type), converter);
+    }
+
+    private <T> BeanPropertyRowMapper<T> getBeanPropertyRowMapper(Class<T> mappedClass) {
+        return BeanPropertyRowMapper.newInstance(mappedClass);
     }
 
 }
