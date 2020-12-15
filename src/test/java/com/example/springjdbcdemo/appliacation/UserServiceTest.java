@@ -51,6 +51,25 @@ class UserServiceTest {
         User user = userService.save(buildUser(TEST));
         List<User> users = userService.findByName(user.getName());
         Assertions.assertEquals(1, users.size());
+        Assertions.assertEquals(user.getName(), users.get(0).getName());
+    }
+
+    @Test
+    void findByAge() {
+        User user = userService.save(buildUser(TEST));
+        List<User> users = userService.findByAge(user.getAge());
+        Assertions.assertEquals(1, users.size());
+        Assertions.assertEquals(user.getAge(), users.get(0).getAge());
+    }
+
+    @Test
+    void updateAge() {
+        User user = userService.save(buildUser(TEST));
+        int age = 26;
+        userService.updateAge(user.getId(), age);
+        Optional<User> result = userService.findById(user.getId());
+        Assertions.assertTrue(result.isPresent());
+        Assertions.assertEquals(age, result.map(User::getAge).get());
     }
 
     @Test

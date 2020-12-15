@@ -40,6 +40,14 @@ public class UserService {
         return userJdbcRepository.findByName(firstName);
     }
 
+    public List<User> findByAge(Integer age) {
+        return userJdbcRepository.findByAge(age);
+    }
+
+    public void updateAge(Long id, Integer age) {
+        userJdbcRepository.updateAge(id, age);
+    }
+
     /**
      * Save.
      *

@@ -28,11 +28,20 @@ public interface UserRepository {
 
     /**
      * Find by name.
+     * JDBC处理成SQL语句：SELECT * FROM user WHERE name = :name
      *
      * @param name the first name
      * @return the list
      */
     List<User> findByName(String name);
+
+    /**
+     * Find by age.
+     *
+     * @param age the name
+     * @return the list
+     */
+    List<User> findByAge(Integer age);
 
     /**
      * Find by id.
@@ -41,6 +50,8 @@ public interface UserRepository {
      * @return the optional
      */
     Optional<User> findById(Long id);
+
+    void updateAge(Long id, Integer age);
 
     /**
      * Custom find.
