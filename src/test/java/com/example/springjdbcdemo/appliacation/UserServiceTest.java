@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
@@ -24,6 +25,8 @@ import java.util.stream.StreamSupport;
  **/
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
+// @ActiveProfiles(value = "mysql")
+@ActiveProfiles(value = "h2")
 class UserServiceTest {
     public static final int AGE = 24;
     public static final int BATCH_SIZE = 10;
