@@ -9,6 +9,8 @@ Demo project for Spring boot starter jdbc (Spring boot 2.4.0)
 
 ## reference
 
-[https://github.com/spring-projects/spring-data-jdbc](https://github.com/spring-projects/spring-data-jdbc)
+[SpringJdbc源码 ](https://github.com/spring-projects/spring-data-jdbc)
+
+[SpringJdbc官方文档](https://docs.spring.io/spring-data/jdbc/docs/current/reference/html/#jdbc.query-methods)
 
 [COLA应用架构](https://github.com/alibaba/COLA)
