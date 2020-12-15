@@ -5,25 +5,47 @@ import org.springframework.data.relational.core.sql.TrueCondition;
 import org.springframework.data.relational.core.sql.Visitor;
 
 /**
+ * The type Filter condition.
+ *
  * @author zuozhu.meng
- * @since 2020/12/15
- **/
+ * @since 2020 /12/15
+ */
 public class FilterCondition implements Condition {
 
     private Condition holder;
 
+    /**
+     * Instantiates a new Filter condition.
+     */
     public FilterCondition() {
         this(TrueCondition.INSTANCE);
     }
 
+    /**
+     * Instantiates a new Filter condition.
+     *
+     * @param holder the holder
+     */
     public FilterCondition(Condition holder) {
         this.holder = holder;
     }
 
+    /**
+     * Create.
+     *
+     * @return the filter condition
+     */
     public static FilterCondition create() {
         return new FilterCondition();
     }
 
+    /**
+     * And.
+     *
+     * @param other  the other
+     * @param filter the filter
+     * @return the filter condition
+     */
     public FilterCondition and(Condition other, boolean filter) {
         if (filter) {
             holder = holder.and(other);
@@ -31,6 +53,13 @@ public class FilterCondition implements Condition {
         return this;
     }
 
+    /**
+     * Or.
+     *
+     * @param other  the other
+     * @param filter the filter
+     * @return the filter condition
+     */
     public FilterCondition or(Condition other, boolean filter) {
         if (filter) {
             holder = holder.or(other);
@@ -38,6 +67,12 @@ public class FilterCondition implements Condition {
         return this;
     }
 
+    /**
+     * Not.
+     *
+     * @param filter the filter
+     * @return the filter condition
+     */
     public FilterCondition not(boolean filter) {
         if (filter) {
             holder = holder.not();
