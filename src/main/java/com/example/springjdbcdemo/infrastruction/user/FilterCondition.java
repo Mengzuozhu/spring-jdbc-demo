@@ -1,4 +1,4 @@
-package com.example.springjdbcdemo.infrastruction;
+package com.example.springjdbcdemo.infrastruction.user;
 
 import org.springframework.data.relational.core.sql.Condition;
 import org.springframework.data.relational.core.sql.TrueCondition;

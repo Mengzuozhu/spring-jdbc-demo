@@ -1,4 +1,4 @@
-package com.example.springjdbcdemo.infrastruction;
+package com.example.springjdbcdemo.infrastruction.user;
 
 import com.example.springjdbcdemo.domain.user.User;
 import com.example.springjdbcdemo.domain.user.UserRepository;

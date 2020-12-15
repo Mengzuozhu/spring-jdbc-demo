@@ -1,6 +1,6 @@
 package com.example.springjdbcdemo.appliacation;
 
-import com.example.springjdbcdemo.config.ApplicationConfig;
+import com.example.springjdbcdemo.config.UserConfiguration;
 import com.example.springjdbcdemo.domain.user.User;
 import com.example.springjdbcdemo.domain.user.UserQuery;
 import org.junit.jupiter.api.AfterEach;
@@ -98,7 +98,7 @@ class UserServiceTest {
                 .build();
     }
 
-    @SpringBootApplication(scanBasePackageClasses = {UserService.class, ApplicationConfig.class})
+    @SpringBootApplication(scanBasePackageClasses = {UserService.class, UserConfiguration.class})
     static class InnerConfig {
     }
 

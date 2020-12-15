@@ -11,5 +11,5 @@ import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 @Configuration
 @EnableJdbcAuditing
 @EnableJdbcRepositories(basePackages = "com.example.springjdbcdemo.infrastruction")
-public class ApplicationConfig {
+public class UserConfiguration {
 }
