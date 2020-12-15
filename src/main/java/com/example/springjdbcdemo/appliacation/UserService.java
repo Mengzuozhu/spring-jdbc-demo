@@ -10,34 +10,69 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ * The type User service.
+ *
  * @author zuozhu.meng
- * @since 2020/12/9
- **/
+ * @since 2020 /12/9
+ */
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userJdbcRepository;
 
-    public List<User> findByName(String firstName) {
-        return userJdbcRepository.findByName(firstName);
-    }
-
+    /**
+     * Find by id.
+     *
+     * @param id the id
+     * @return the optional
+     */
     public Optional<User> findById(Long id) {
         return userJdbcRepository.findById(id);
     }
 
-    public User save(User s) {
-        return userJdbcRepository.save(s);
+    /**
+     * Find by name.
+     *
+     * @param firstName the first name
+     * @return the list
+     */
+    public List<User> findByName(String firstName) {
+        return userJdbcRepository.findByName(firstName);
     }
 
+    /**
+     * Save.
+     *
+     * @param user the user
+     * @return the user
+     */
+    public User save(User user) {
+        return userJdbcRepository.save(user);
+    }
+
+    /**
+     * Save all.
+     *
+     * @param iterable the iterable
+     * @return the iterable
+     */
     public Iterable<User> saveAll(Iterable<User> iterable) {
         return userJdbcRepository.batchSave(iterable);
     }
 
+    /**
+     * Custom find.
+     *
+     * @param userQuery the user query
+     * @return the list
+     */
     public List<User> customFind(UserQuery userQuery) {
         return userJdbcRepository.customFind(userQuery);
     }
 
+    /**
+     * Delete all.
+     */
     public void deleteAll() {
         userJdbcRepository.deleteAll();
     }
