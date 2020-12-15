@@ -1,4 +1,4 @@
-# spring-jdbc-demo
+# spring-data-jdbc-demo
 Demo project for Spring Data JDBC (Spring boot 2.4.0)
 
 - Spring Data JDBC常用功能示例：`PagingAndSortingRepository、NamedParameterJdbcTemplate、@Query、@Modifying`等
