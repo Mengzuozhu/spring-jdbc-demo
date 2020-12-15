@@ -51,6 +51,12 @@ public interface UserRepository {
      */
     Optional<User> findById(Long id);
 
+    /**
+     * Update age.
+     *
+     * @param id  the id
+     * @param age the age
+     */
     void updateAge(Long id, Integer age);
 
     /**
