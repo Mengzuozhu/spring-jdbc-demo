@@ -27,54 +27,54 @@ import java.util.stream.StreamSupport;
 @ExtendWith(SpringExtension.class)
 // @ActiveProfiles(value = "mysql")
 @ActiveProfiles(value = "h2")
-class UserServiceTest {
+class UserApplicationTest {
     public static final int AGE = 24;
     public static final int BATCH_SIZE = 10;
     private static final String TEST = "test";
     @Autowired
-    private UserService userService;
+    private UserApplication userApplication;
 
     @AfterEach
     void tearDown() {
-        userService.deleteAll();
+        userApplication.deleteAll();
     }
 
     @Test
     void findById() {
-        User user = userService.save(buildUser(TEST));
-        Optional<User> result = userService.findById(user.getId());
+        User user = userApplication.save(buildUser(TEST));
+        Optional<User> result = userApplication.findById(user.getId());
         Assertions.assertTrue(result.isPresent());
     }
 
     @Test
     void findByName() {
-        User user = userService.save(buildUser(TEST));
-        List<User> users = userService.findByName(user.getName());
+        User user = userApplication.save(buildUser(TEST));
+        List<User> users = userApplication.findByName(user.getName());
         Assertions.assertEquals(1, users.size());
         Assertions.assertEquals(user.getName(), users.get(0).getName());
     }
 
     @Test
     void findByAge() {
-        User user = userService.save(buildUser(TEST));
-        List<User> users = userService.findByAge(user.getAge());
+        User user = userApplication.save(buildUser(TEST));
+        List<User> users = userApplication.findByAge(user.getAge());
         Assertions.assertEquals(1, users.size());
         Assertions.assertEquals(user.getAge(), users.get(0).getAge());
     }
 
     @Test
     void updateAge() {
-        User user = userService.save(buildUser(TEST));
+        User user = userApplication.save(buildUser(TEST));
         int age = 26;
-        userService.updateAge(user.getId(), age);
-        Optional<User> result = userService.findById(user.getId());
+        userApplication.updateAge(user.getId(), age);
+        Optional<User> result = userApplication.findById(user.getId());
         Assertions.assertTrue(result.isPresent());
         Assertions.assertEquals(age, result.map(User::getAge).get());
     }
 
     @Test
     void save() {
-        User user = userService.save(buildUser(TEST));
+        User user = userApplication.save(buildUser(TEST));
         Assertions.assertNotNull(user);
     }
 
@@ -90,7 +90,7 @@ class UserServiceTest {
     @Test
     void customFindShouldOne() {
         saveAll();
-        List<User> users = userService.customFind(UserQuery.builder()
+        List<User> users = userApplication.customFind(UserQuery.builder()
                 .name(TEST + 0)
                 .age(AGE)
                 .build());
@@ -100,7 +100,7 @@ class UserServiceTest {
     @Test
     void customFindShouldAll() {
         saveAll();
-        List<User> users = userService.customFind(UserQuery.builder()
+        List<User> users = userApplication.customFind(UserQuery.builder()
                 .build());
         Assertions.assertEquals(BATCH_SIZE, users.size());
     }
@@ -109,7 +109,7 @@ class UserServiceTest {
         List<User> users = IntStream.range(0, BATCH_SIZE)
                 .mapToObj(i -> buildUser(TEST + i))
                 .collect(Collectors.toList());
-        return userService.saveAll(users);
+        return userApplication.saveAll(users);
     }
 
     private User buildUser(String name) {
@@ -120,7 +120,7 @@ class UserServiceTest {
                 .build();
     }
 
-    @SpringBootApplication(scanBasePackageClasses = {UserService.class, UserConfiguration.class})
+    @SpringBootApplication(scanBasePackageClasses = {UserApplication.class, UserConfiguration.class})
     static class InnerConfig {
     }
 

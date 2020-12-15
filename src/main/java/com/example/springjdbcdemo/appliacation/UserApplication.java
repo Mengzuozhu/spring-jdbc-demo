@@ -17,7 +17,7 @@ import java.util.Optional;
  */
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserApplication {
     private final UserRepository userJdbcRepository;
 
     /**
@@ -40,10 +40,22 @@ public class UserService {
         return userJdbcRepository.findByName(firstName);
     }
 
+    /**
+     * Find by age.
+     *
+     * @param age the age
+     * @return the list
+     */
     public List<User> findByAge(Integer age) {
         return userJdbcRepository.findByAge(age);
     }
 
+    /**
+     * Update age.
+     *
+     * @param id  the id
+     * @param age the age
+     */
     public void updateAge(Long id, Integer age) {
         userJdbcRepository.updateAge(id, age);
     }
