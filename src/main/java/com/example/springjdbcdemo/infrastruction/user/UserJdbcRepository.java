@@ -30,6 +30,7 @@ public interface UserJdbcRepository extends PagingAndSortingRepository<User, Lon
 
     /**
      * Find by age.
+     * user @Query
      *
      * @param age the age
      * @return the list
@@ -40,6 +41,7 @@ public interface UserJdbcRepository extends PagingAndSortingRepository<User, Lon
 
     /**
      * Update age.
+     * use @Query and @Modifying
      *
      * @param id  the id
      * @param age the age
