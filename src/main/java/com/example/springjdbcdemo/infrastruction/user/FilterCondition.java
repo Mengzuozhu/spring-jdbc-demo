@@ -12,13 +12,14 @@ import org.springframework.data.relational.core.sql.Visitor;
  */
 public class FilterCondition implements Condition {
 
+    private static final TrueCondition DEFAULT_FILTER = TrueCondition.INSTANCE;
     private Condition holder;
 
     /**
      * Instantiates a new Filter condition.
      */
     public FilterCondition() {
-        this(TrueCondition.INSTANCE);
+        this(DEFAULT_FILTER);
     }
 
     /**
@@ -48,7 +49,11 @@ public class FilterCondition implements Condition {
      */
     public FilterCondition and(Condition other, boolean filter) {
         if (filter) {
-            holder = holder.and(other);
+            if (DEFAULT_FILTER.equals(holder)) {
+                holder = other;
+            } else {
+                holder = holder.and(other);
+            }
         }
         return this;
     }
@@ -62,7 +67,11 @@ public class FilterCondition implements Condition {
      */
     public FilterCondition or(Condition other, boolean filter) {
         if (filter) {
-            holder = holder.or(other);
+            if (DEFAULT_FILTER.equals(holder)) {
+                holder = other;
+            } else {
+                holder = holder.or(other);
+            }
         }
         return this;
     }

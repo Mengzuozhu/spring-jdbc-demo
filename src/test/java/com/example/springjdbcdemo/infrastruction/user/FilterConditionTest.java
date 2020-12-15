@@ -21,7 +21,7 @@ class FilterConditionTest {
         FilterCondition filterCondition = FilterCondition.create()
                 .and(table.column("name").isEqualTo(SQL.literalOf(userQueryName)), userQueryName != null)
                 .and(table.column("age").isEqualTo(SQL.literalOf(userQueryAge)), userQueryAge != null);
-        Assertions.assertEquals("1 = 1 AND user.name = 'test'", filterCondition.toString());
+        Assertions.assertEquals("user.name = 'test'", filterCondition.toString());
     }
 
     @Test
@@ -32,7 +32,12 @@ class FilterConditionTest {
         FilterCondition filterCondition = FilterCondition.create()
                 .or(table.column("name").isEqualTo(SQL.literalOf(userQueryName)), userQueryName != null)
                 .or(table.column("age").isEqualTo(SQL.literalOf(userQueryAge)), userQueryAge != null);
-        Assertions.assertEquals("1 = 1 OR user.name = 'test'", filterCondition.toString());
+        Assertions.assertEquals("user.name = 'test'", filterCondition.toString());
+    }
+
+    @Test
+    void defaultFilter() {
+        Assertions.assertEquals("1 = 1", FilterCondition.create().toString());
     }
 
     private UserQuery buildQuery() {
