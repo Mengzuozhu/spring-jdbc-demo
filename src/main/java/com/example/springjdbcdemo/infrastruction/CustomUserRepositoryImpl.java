@@ -21,6 +21,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class CustomUserRepositoryImpl implements CustomUserRepository {
+    private final SqlRenderer sqlRenderer = SqlRenderer.create();
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private final RelationalMappingContext context;
     private final JdbcConverter converter;
@@ -46,7 +47,7 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
     @SuppressWarnings("unchecked")
     private List<User> query(Select select) {
         RowMapper<User> entityRowMapper = (RowMapper<User>) getEntityRowMapper();
-        return namedParameterJdbcTemplate.query(SqlRenderer.toString(select), entityRowMapper);
+        return namedParameterJdbcTemplate.query(sqlRenderer.render(select), entityRowMapper);
     }
 
     private EntityRowMapper<?> getEntityRowMapper() {
