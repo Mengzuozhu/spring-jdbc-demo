@@ -67,19 +67,6 @@ public class FilterCondition implements Condition {
         return this;
     }
 
-    /**
-     * Not.
-     *
-     * @param filter the filter
-     * @return the filter condition
-     */
-    public FilterCondition not(boolean filter) {
-        if (filter) {
-            holder = holder.not();
-        }
-        return this;
-    }
-
     @Override
     public String toString() {
         return holder.toString();
