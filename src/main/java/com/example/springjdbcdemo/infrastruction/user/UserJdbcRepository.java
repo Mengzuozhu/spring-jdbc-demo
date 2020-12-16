@@ -25,12 +25,13 @@ public interface UserJdbcRepository extends PagingAndSortingRepository<User, Lon
      */
     @Override
     default Iterable<User> batchSave(Iterable<User> entities) {
+        // 为避免方法重名，内部再调用CrudRepository的方法saveAll
         return saveAll(entities);
     }
 
     /**
      * Find by age.
-     * user @Query
+     * use @Query
      *
      * @param age the age
      * @return the list
