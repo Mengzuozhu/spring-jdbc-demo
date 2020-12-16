@@ -90,11 +90,14 @@ class UserApplicationTest {
     @Test
     void customFindShouldOne() {
         saveAll();
+        String name = TEST + 0;
         List<User> users = userApplication.customFind(UserQuery.builder()
-                .name(TEST + 0)
+                .name(name)
                 .age(AGE)
                 .build());
         Assertions.assertEquals(1, users.size());
+        Assertions.assertEquals(AGE, users.get(0).getAge());
+        Assertions.assertEquals(name, users.get(0).getName());
     }
 
     @Test
