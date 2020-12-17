@@ -10,7 +10,7 @@ import org.springframework.data.relational.core.sql.*;
 import org.springframework.data.relational.core.sql.render.SqlRenderer;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,7 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CustomUserRepositoryImpl implements CustomUserRepository {
     private final SqlRenderer sqlRenderer = SqlRenderer.create();
-    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final NamedParameterJdbcOperations namedParameterJdbcOperations;
     private final RelationalMappingContext context;
     private final JdbcConverter converter;
 
@@ -48,7 +48,7 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
     @SuppressWarnings("unchecked")
     private List<User> query(Select select) {
         RowMapper<User> entityRowMapper = (RowMapper<User>) getEntityRowMapper(User.class);
-        return namedParameterJdbcTemplate.query(sqlRenderer.render(select), entityRowMapper);
+        return namedParameterJdbcOperations.query(sqlRenderer.render(select), entityRowMapper);
         // you can also use BeanPropertyRowMapper
         // return namedParameterJdbcTemplate.query(sqlRenderer.render(select), getBeanPropertyRowMapper(User.class));
     }
