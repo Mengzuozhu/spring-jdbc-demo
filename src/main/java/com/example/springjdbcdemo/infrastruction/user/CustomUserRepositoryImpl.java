@@ -30,8 +30,8 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
     @Override
     public List<User> customFind(UserQuery userQuery) {
         Table table = SQL.table("user");
-        Column name = table.column("name");
-        Column age = table.column("age");
+        Column name = table.column(User.Fields.name);
+        Column age = table.column(User.Fields.age);
         String userQueryName = userQuery.getName();
         Integer userQueryAge = userQuery.getAge();
         FilterCondition filterCondition = FilterCondition.create()
