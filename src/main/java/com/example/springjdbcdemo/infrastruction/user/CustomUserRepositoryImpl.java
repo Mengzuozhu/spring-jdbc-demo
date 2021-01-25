@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.jdbc.core.convert.EntityRowMapper;
 import org.springframework.data.jdbc.core.convert.JdbcConverter;
 import org.springframework.data.relational.core.mapping.RelationalMappingContext;
+import org.springframework.data.relational.core.mapping.RelationalPersistentEntity;
 import org.springframework.data.relational.core.sql.*;
 import org.springframework.data.relational.core.sql.render.SqlRenderer;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -29,7 +30,7 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
 
     @Override
     public List<User> customFind(UserQuery userQuery) {
-        Table table = SQL.table("user");
+        Table table = Table.create(getRequiredPersistentEntity(User.class).getTableName());
         Column name = table.column(User.Fields.name);
         Column age = table.column(User.Fields.age);
         String userQueryName = userQuery.getName();
@@ -54,7 +55,11 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
     }
 
     private EntityRowMapper<?> getEntityRowMapper(Class<?> type) {
-        return new EntityRowMapper<>(context.getRequiredPersistentEntity(type), converter);
+        return new EntityRowMapper<>(getRequiredPersistentEntity(type), converter);
+    }
+
+    private RelationalPersistentEntity<?> getRequiredPersistentEntity(Class<?> type) {
+        return context.getRequiredPersistentEntity(type);
     }
 
     private <T> BeanPropertyRowMapper<T> getBeanPropertyRowMapper(Class<T> mappedClass) {
